@@ -56,6 +56,7 @@ class Player(CircleShape):
 
     def drift(self, dt):
         self.position += self.velocity * dt
+        self.wrap_around()
 
     def shoot(self):
         if self.timer > 0:
