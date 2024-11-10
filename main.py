@@ -12,16 +12,6 @@ from shot import Shot
 
 
 def main():
-    def reset_game():
-        updatable.empty()
-        drawable.empty()
-        asteroids.empty()
-        shots.empty()
-
-        asteroid_field = AsteroidField()
-        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        return False
-
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
@@ -54,11 +44,6 @@ def main():
             paused = not paused
             print("Game is " + ("paused" if paused else "unpaused"))
         p_key_pressed = keys[pygame.K_p]
-
-        if game_over and keys[pygame.K_RETURN]:
-            game_over = reset_game()
-            paused = False
-            continue
 
         if not paused and not game_over:
             for obj in updatable:
@@ -93,13 +78,6 @@ def main():
             text = font.render("GAME OVER", True, (255, 255, 255))
             text_rect = text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
             screen.blit(text, text_rect)
-
-            font = pygame.font.Font(None, 36)
-            restart_text = font.render("Press RETURN to restart", True, (255, 255, 255))
-            restart_rect = restart_text.get_rect(
-                center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50)
-            )
-            screen.blit(restart_text, restart_rect)
 
         pygame.display.flip()
 
